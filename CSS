@@ -6198,3 +6198,40 @@ div[data-tistory-react-app=Namecard] {
 		border-radius: 5px;
 
 	}
+
+  pre {text-align: start;
+    position: relative;
+    overflow: visible;
+}
+pre .copy-button {
+    opacity: 0;
+    position: absolute;
+    right: 2px;
+    top: 4px;
+    padding: 2px 6px;
+    color: #aaa;
+    background: rgba(0,0,0,.6);
+    border-radius: 5px;
+    transition: opacity .3s ease-in-out;
+}
+pre:hover .copy-button {
+	opacity: 1;
+}
+pre .copy-button:hover {
+    color: #eee;
+    transition: all ease-in-out 0.3s;
+}
+pre .copy-button:active {
+    color: rgb(69, 128, 206);
+    transition: all ease-in-out 0.1s;
+}
+.copy-message:before {
+    content: attr(copy-message);
+    position: absolute;
+    left: -65px;
+    top: 0px;
+    padding: 2px 4px;
+    color: #fff;
+    background: rgba(0,0,0,.6);
+    border-radius: 5px;
+}
