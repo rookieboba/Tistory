@@ -13,34 +13,22 @@
     <link rel="stylesheet" :href='"//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"'>
     <link rel="stylesheet" :href="`//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/${dark ? skinOptions.hljsDark : skinOptions.hljs}.min.css`">
     <script src="./images/bootstrap.js"></script>
-    <!--URL 링크에서 카테고리 정보 제거-->
-    <script type="text/javascript"> if (typeof(history.pushState) == 'function') { var CatagoryURL = location.href; CatagoryURL = CatagoryURL.replace(/\?category=([0-9]+)/ig, ''); history.pushState(null, null, CatagoryURL); } </script>
-    <!--URL 링크에서 카테고리 정보 제거 끝-->
-
-
-
-
-<!-- 인라인 코드 블럭 시작 -->
-<script>
-    let textNodes = document.querySelectorAll("article > *:not(figure):not(pre)");
-    textNodes.forEach(node => {
-        node.innerHTML = node.innerHTML.replace(/(.*?)/g, '<code>$1</code>');
-    });
-</script>
-<style>
-  :root {
-    --h-idx: 1100px;
-    /* index */
-    --h-pem: px;
-    /* permalink */
-    --h-s: 360px;
-    /* sidebar */
-    --h-c: calc(100% - var(--h-s));
-    /* content */
-    --h-h: 256px;
-    /* header */
-  }
-</style>
+    <script src="./images/clipboardmin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
+    <style>
+      :root {
+        --h-idx: 1100px;
+        /* index */
+        --h-pem: [##_var_width_##]px;
+        /* permalink */
+        --h-s: 256px;
+        /* sidebar */
+        --h-c: calc(100% - var(--h-s));
+        /* content */
+        --h-h: 256px;
+        /* header */
+      }
+    </style>
     <script>
       /**
        * Set skin options
@@ -63,67 +51,7 @@
     <script defer src="./images/vendor.aaa77fa5a22cc582f116.js"></script>
     <link rel="stylesheet" href="./style.css">
     <script defer src="./images/script.9pGT49dtTLa20NI6sLXd.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.25.0/tocbot.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.25.0/tocbot.min.js"></script>
-<!-- 코드복사 버튼 -->
-<script type="text/javascript" src="./images/clipboard.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<!-- 코드복사 버튼 -->
   </head>
-
-<script>
-  var content = document.querySelector('.article_view')
-  var startContent = document.createElement("h7");
-  startContent.classList.add('toc-default-header');
-  content.insertBefore(startContent, content.firstChild)
-  var headings = content.querySelectorAll('h1, h2, h3, h4, h5, h6, h7')
-  var headingMap = {}
-
-  Array.prototype.forEach.call(headings, function (heading) {
-      if (heading.parentElement.classList.contains('another_category')) {
-        heading.classList.add('another_category_header')
-      }
-      else {
-        var id = heading.id ? heading.id : heading.textContent.trim().toLowerCase()
-                  .split(' ').join('-').replace(/[\!\@\#\$\%\^\&\*\(\):]/ig, '')
-        headingMap[id] = !isNaN(headingMap[id]) ? ++headingMap[id] : 0
-        if (headingMap[id]) {
-          heading.id = id + '-' + headingMap[id]
-        } else {
-          heading.id = id
-        }
-      }
-    })
-
-  tocbot.init({
-    tocSelector: '.toc',
-    contentSelector: '.article_view',
-    headingSelector:'h1, h2, h3, h4, h7',
-    hasInnerContainers: false,
-    ignoreSelector: '.another_category_header'
-  });
-
-  $(document).ready(function(){
-    var toc = $('.toc');
-    toc.addClass('toc-absolute');
-
-    var toc_top = toc.parent().offset().top;
-    $(window).scroll(function() {
-      if ($(this).scrollTop() >= toc_top) {
-        toc.addClass('toc-fixed');
-        toc.removeClass('toc-absolute');
-      } else {
-        toc.addClass('toc-absolute');
-        toc.removeClass('toc-fixed');
-      }
-    });
-
-  });
-
-</script>
-
-
-
 
   <body class="overflow-x-hidden bg-h-100 dark:bg-h-800" id="[##_body_id_##]">
     <div class="w-screen h-screen fixed top-0 left-0 z-[10000] flex items-center justify-center bg-h-100 dark:bg-h-800" id="loader" x-show="loading" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
@@ -170,8 +98,6 @@
               </div>
             </s_index_article_rep>
             <s_permalink_article_rep>
-            
-            <div class="toc toc-fixed" ></div>
               <section id="post" x-init="$store.header.show = false">
                 <header class="px-4 mb-10 lg:px-0 lg:mb-16" id="header" x-ref="header" data-header-style="[##_var_header-style_##]">
                   <s_notice_rep_thumbnail>
@@ -1820,36 +1746,34 @@ hELLO 는 무료인 만큼, 링크의 주소는 반드시 지켜주시기 바랍
         </aside>
       </div>
     </s_t3>
-  
 
-  <!-- Added -->
-	<script>
-	$(document).ready(function () {
-		$('pre[id^="code"]').each(function (index, e) {
-			let button = document.createElement('button');
-			button.innerText = "Copy";
-			button.className = 'copy-button';
-			button.style.cursor = 'pointer';
-			button.setAttribute('data-clipboard-text', e.innerText);
-			button.addEventListener('mouseleave', function(event) {
-				event.currentTarget.setAttribute('class', 'copy-button');
-				event.currentTarget.removeAttribute('copy-message');
-			});
-			e.appendChild(button);
-		});
-	 
-		var clipboard = new ClipboardJS('.copy-button');
-		clipboard.on('success', function (e) {
-	  		e.clearSelection();
-			e.trigger.setAttribute('class', 'copy-button copy-message');
-			e.trigger.setAttribute('copy-message', '복사완료!');
-		});
-	});
-	</script>
-	   <!-- Added -->
+    <script>
+$(document).ready(function () {
+    $('pre[id^="code"],[class="bash"]').each(function (index, e) {
+        let button = document.createElement('button');
+        button.innerText = "Copy";
+        button.className = 'copy-button';
+        button.style.cursor = 'pointer';
+        button.setAttribute('data-clipboard-text', e.innerText);
+        button.addEventListener('mouseleave', function(event) {
+            event.currentTarget.setAttribute('class', 'copy-button');
+            event.currentTarget.removeAttribute('copy-message');
+        });
+        e.appendChild(button);
+    });
 
-	</body>
+    var clipboard = new ClipboardJS('.copy-button');
+    clipboard.on('success', function (e) {
+        e.clearSelection();
+        e.trigger.setAttribute('class', 'copy-button copy-message');
+        e.trigger.setAttribute('copy-message', 'Copied!');
 
-	</html>
+        setTimeout(() => {
+			$('.copy-button').removeClass('copy-message');
+        }, 500);
+    });
+});
+</script>
+  </body>
 
-
+</html>
