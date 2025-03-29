@@ -5,5 +5,5 @@ Tistory 꾸미기 위한 CSS
 # 사용 용도
 https://sungbin-park.tistory.com/99
 
-# hELLO 님꺼 첨부
-https://pronist.tistory.com/5
+# 실행 시, ENd 부분만 수정하여 실행
+python tistory_crawl.py
