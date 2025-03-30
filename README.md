@@ -6,4 +6,6 @@ Tistory 꾸미기 위한 CSS
 https://sungbin-park.tistory.com/99
 
 # 실행 시, ENd 부분만 수정하여 실행
+
+pip install beautifulsoup4 requests
 python tistory_crawl.py
